@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--根据订单id查询订单关联的所有商品，
+由于订单和商品是多对多的关系，数据库使用了一个中间表tb_item维护多对多
+的关系，故此处使用了一个子查询，熟悉根据订单id到中间表中查询出所有的商品
+之后根据所有商品的id查询出所有的商品信息，并将这些信息封装到Article
+对象当中-->
+<mapper namespace="com.zcy.MybatisDemo.model.dao.ArticleMapper">
+    <select id="selectArticleByOrderId" parameterType="int"
+            resultType="com.zcy.MybatisDemo.beans.Article">
+        SELECT * FROM tb_article WHERE id IN(
+        SELECT article_id FROM tb_item WHERE order_id=#{id}
+        )
+    </select>
+</mapper>

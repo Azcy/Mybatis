@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- XML 配置文件包含对 Mybatis 系统的核心设置 -->
+<configuration>
+
+
+    <properties resource="log4j.properties"/>
+    <!-- 指定 MyBatis 所用日志的具体实现 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--要设置使延迟加载生效必须配置下面两个属性-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!-- 环境配置，即连接的数据库 -->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!-- 指定事务管理类型，tyoe="JDBC"指简单使用了JDBC的提交和回滚设置-->
+            <transactionManager type="JDBC"/>
+            <!-- dataSource 指数据源配置,POOLED是JDBC链接对象的数据源连接池的实现-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- mappers 告诉了MyBatis 去那里找持久化类的配置文件-->
+    <!--<mappers>-->
+        <!--<mapper resource="StudentMapper.xml"/>-->
+    <!--</mappers>-->
+    <mappers>
+        <mapper resource="Mapper/CardMapper.xml"/>
+        <mapper resource="Mapper/PersonMapper.xml"/>
+        <mapper resource="Mapper/ClazzMapper.xml"/>
+        <mapper resource="Mapper/StudentMapper.xml"/>
+        <mapper resource="Mapper/ArticleMapper.xml"/>
+        <mapper resource="Mapper/UserMapper.xml"/>
+        <mapper resource="Mapper/OrderMapper.xml"/>
+    </mappers>
+
+
+
+</configuration>
